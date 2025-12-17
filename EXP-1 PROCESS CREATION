@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+    int pid;
+
+    pid = fork();   // Create a new process
+
+    if (pid < 0)
+    {
+        printf("Process creation failed\n");
+    }
+    else if (pid == 0)
+    {
+        // Child process
+        printf("Child Process\n");
+        printf("Child PID = %d\n", getpid());
+        printf("Parent PID = %d\n", getppid());
+    }
+    else
+    {
+        // Parent process
+        printf("Parent Process\n");
+        printf("Parent PID = %d\n", getpid());
+        printf("Child PID = %d\n", pid);
+    }
+
+    return 0;
+}
+ OUTPUT
+Parent Process
+Parent PID = 2345
+Child PID = 2346
+
+Child Process
+Child PID = 2346
+Parent PID = 2345
+
