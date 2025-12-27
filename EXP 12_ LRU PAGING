@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int main() {
+    int frames[3] = {-1,-1,-1};
+    int ref[] = {1,2,3,4,1,2,5,1,2,3,4,5};
+    int time[3] = {0}, counter = 0, faults = 0;
+
+    for (int i = 0; i < 12; i++) {
+        int found = 0;
+        for (int j = 0; j < 3; j++) {
+            if (frames[j] == ref[i]) {
+                time[j] = ++counter;
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found) {
+            int min = 0;
+            for (int j = 1; j < 3; j++)
+                if (time[j] < time[min])
+                    min = j;
+
+            frames[min] = ref[i];
+            time[min] = ++counter;
+            faults++;
+        }
+    }
+
+    printf("Total Page Faults = %d\n", faults);
+    return 0;
+}
+
+OUTPUT 
+Total Page Faults = 8
