@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int findOptimal(int ref[], int frames[], int n, int index) {
+    int farthest = index, pos = -1;
+
+    for (int i = 0; i < 3; i++) {
+        int j;
+        for (j = index; j < n; j++) {
+            if (frames[i] == ref[j]) {
+                if (j > farthest) {
+                    farthest = j;
+                    pos = i;
+                }
+                break;
+            }
+        }
+        if (j == n)
+            return i;
+    }
+    return (pos == -1) ? 0 : pos;
+}
+
+int main() {
+    int ref[] = {1,2,3,4,1,2,5,1,2,3,4,5};
+    int frames[3] = {-1,-1,-1};
+    int faults = 0;
+
+    for (int i = 0; i < 12; i++) {
+        int found = 0;
+        for (int j = 0; j < 3; j++)
+            if (frames[j] == ref[i])
+                found = 1;
+
+        if (!found) {
+            int pos = findOptimal(ref, frames, 12, i+1);
+            frames[pos] = ref[i];
+            faults++;
+        }
+    }
+
+    printf("Total Page Faults = %d\n", faults);
+    return 0;
+}
+OUTPUT 
+Total Page Faults = 7
