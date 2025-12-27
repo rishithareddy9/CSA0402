@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main() {
+    int start = 5, length = 4;
+
+    printf("File allocated at blocks:\n");
+    for (int i = 0; i < length; i++)
+        printf("%d ", start + i);
+
+    return 0;
+}
