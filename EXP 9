@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    int mem[5] = {100, 500, 200, 300, 600};
+    int process[4] = {212, 417, 112, 426};
+    int i, j;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 5; j++) {
+            if (mem[j] >= process[i]) {
+                printf("Process %d allocated to block %d\n", process[i], mem[j]);
+                mem[j] -= process[i];
+                break;
+            }
+        }
+        if (j == 5)
+            printf("Process %d not allocated\n", process[i]);
+    }
+    return 0;
+}
